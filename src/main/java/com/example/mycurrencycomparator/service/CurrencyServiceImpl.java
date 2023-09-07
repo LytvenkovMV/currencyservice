@@ -6,6 +6,7 @@ import com.example.mycurrencycomparator.exception.CurrencyServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 
 @Service
 @Profile("profile2")
+@PropertySource("classpath:/application.properties")
 public class CurrencyServiceImpl implements CurrencyService {
 
     @Value("${service.currency.url}")
@@ -42,8 +44,8 @@ public class CurrencyServiceImpl implements CurrencyService {
         String histRequest = url + "/historical/" + date + ".json?" + p1 + "&" + p2 + "&" + p3;
         String latestRequest = url + "/latest.json?" + p1 + "&" + p2 + "&" + p3;
 
-        ResponseEntity<ExchApiResponseDto> histResponse = null;
-        ResponseEntity<ExchApiResponseDto> latestResponse = null;
+        ResponseEntity<ExchApiResponseDto> histResponse;
+        ResponseEntity<ExchApiResponseDto> latestResponse;
         try {
             histResponse = restTemplate.getForEntity(histRequest, ExchApiResponseDto.class);
             latestResponse = restTemplate.getForEntity(latestRequest, ExchApiResponseDto.class);

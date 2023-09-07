@@ -2,11 +2,13 @@ package com.example.mycurrencycomparator.client;
 
 import com.example.mycurrencycomparator.dto.currencyrate.ExchApiResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@PropertySource("classpath:/application.properties")
 @FeignClient(value = "currencyclient", url = "${service.currency.url}")
 public interface CurrencyClient {
 
