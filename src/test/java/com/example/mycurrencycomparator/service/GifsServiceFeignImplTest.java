@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@ActiveProfiles(profiles = "profile1")
 @TestPropertySource("classpath:/application.properties")
 @ExtendWith(MockitoExtension.class)
 class GifsServiceFeignImplTest {
