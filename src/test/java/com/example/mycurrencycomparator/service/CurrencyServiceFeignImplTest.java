@@ -3,6 +3,7 @@ package com.example.mycurrencycomparator.service;
 import com.example.mycurrencycomparator.client.CurrencyClient;
 import com.example.mycurrencycomparator.dto.currencyrate.CompareCurrencyResponseDto;
 import com.example.mycurrencycomparator.dto.currencyrate.ExchApiResponseDto;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
@@ -29,17 +31,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockitoExtension.class)
 class CurrencyServiceFeignImplTest {
 
+    @Value("${service.currency.apiKey}")
+    String apiKey;
+
+    @Value("${service.currency.baseCurrency}")
+    String baseCurrency;
+
     @Mock
     private CurrencyClient currencyClient;
 
     @InjectMocks
     private CurrencyServiceFeignImpl currencyService;
 
-    @Value("${service.currency.apiKey}")
-    String apiKey;
-
-    @Value("${service.currency.baseCurrency}")
-    String baseCurrency;
+    @BeforeEach
+    public void setUp() {
+        ReflectionTestUtils.setField(currencyService, "apiKey", apiKey);
+        ReflectionTestUtils.setField(currencyService, "baseCurrency", baseCurrency);
+    }
 
     @Test
     void getCompareResult() {

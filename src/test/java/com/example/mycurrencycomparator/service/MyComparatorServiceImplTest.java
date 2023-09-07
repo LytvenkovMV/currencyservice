@@ -30,6 +30,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockitoExtension.class)
 class MyComparatorServiceImplTest {
 
+    @Value("${service.currency.baseCurrency}")
+    String baseCurrency;
+
     @Mock
     private CurrencyService currencyService;
 
@@ -38,9 +41,6 @@ class MyComparatorServiceImplTest {
 
     @InjectMocks
     private MyComparatorServiceImpl myComparatorService;
-
-    @Value("${service.currency.baseCurrency}")
-    String baseCurrency;
 
     @Test
     void compare() {

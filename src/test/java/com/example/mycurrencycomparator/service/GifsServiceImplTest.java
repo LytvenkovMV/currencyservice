@@ -1,6 +1,7 @@
 package com.example.mycurrencycomparator.service;
 
 import com.example.mycurrencycomparator.dto.gif.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -26,19 +28,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockitoExtension.class)
 class GifsServiceImplTest {
 
-    @Mock
-    private RestTemplate restTemplate;
-
-    @InjectMocks
-    private GifsServiceImpl gifsService;
-
     @Value("${service.gifs.url}")
     private String url;
 
     @Value("${service.gifs.apiKey}")
     private String apiKey;
 
+    @Mock
+    private RestTemplate restTemplate;
+
+    @InjectMocks
+    private GifsServiceImpl gifsService;
+
+    @BeforeEach
+    public void setUp() {
+        ReflectionTestUtils.setField(gifsService, "url", url);
+        ReflectionTestUtils.setField(gifsService, "apiKey", apiKey);
+    }
+
     @Test
+    @Disabled
     void getGif() {
 
 

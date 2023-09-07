@@ -2,20 +2,20 @@ package com.example.mycurrencycomparator.service;
 
 import com.example.mycurrencycomparator.dto.currencyrate.CompareCurrencyResponseDto;
 import com.example.mycurrencycomparator.dto.currencyrate.ExchApiResponseDto;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
@@ -30,12 +30,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockitoExtension.class)
 class CurrencyServiceImplTest {
 
-    @Mock
-    private RestTemplate restTemplate;
-
-    @InjectMocks
-    private CurrencyServiceImpl currencyService;
-
     @Value("${service.currency.url}")
     String url;
 
@@ -44,6 +38,19 @@ class CurrencyServiceImplTest {
 
     @Value("${service.currency.baseCurrency}")
     String baseCurrency;
+
+    @Mock
+    private RestTemplate restTemplate;
+
+    @InjectMocks
+    private CurrencyServiceImpl currencyService;
+
+    @BeforeEach
+    public void setUp() {
+        ReflectionTestUtils.setField(currencyService, "url", url);
+        ReflectionTestUtils.setField(currencyService, "apiKey", apiKey);
+        ReflectionTestUtils.setField(currencyService, "baseCurrency", baseCurrency);
+    }
 
     @Test
     void getCompareResult() {
