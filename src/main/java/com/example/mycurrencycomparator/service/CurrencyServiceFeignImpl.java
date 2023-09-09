@@ -32,8 +32,8 @@ public class CurrencyServiceFeignImpl implements CurrencyService {
         LocalDate localDateToday = LocalDate.now();
         LocalDate localDateYesterday = localDateToday.minusDays(1);
 
-        ResponseEntity<ExchApiResponseDto> histResponse = null;
-        ResponseEntity<ExchApiResponseDto> latestResponse = null;
+        ResponseEntity<ExchApiResponseDto> histResponse;
+        ResponseEntity<ExchApiResponseDto> latestResponse;
         try {
             histResponse = currencyClient.getHistoricalRate(localDateYesterday.toString(), apiKey, baseCurrency, comparedCurrency);
             latestResponse = currencyClient.getLatestRate(apiKey, baseCurrency, comparedCurrency);

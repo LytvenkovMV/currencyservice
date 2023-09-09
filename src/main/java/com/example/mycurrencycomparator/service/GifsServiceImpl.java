@@ -28,7 +28,7 @@ public class GifsServiceImpl implements GifsService {
     @Override
     public ResponseEntity<GetGifResponseDto> getGif(String qWord) {
 
-        Integer offset = new Random().nextInt(99) + 1;
+        Integer offset = new Random().nextInt(1) + 1;
         String p1 = "api_key=" + apiKey;
         String p2 = "q=" + qWord;
         String p3 = "limit=" + 1;
@@ -36,7 +36,7 @@ public class GifsServiceImpl implements GifsService {
         String p5 = "bundle=" + "messaging_non_clips";
         String request = url + "?" + p1 + "&" + p2 + "&" + p3 + "&" + p4 + "&" + p5;
 
-        ResponseEntity<GetGifResponseDto> response = null;
+        ResponseEntity<GetGifResponseDto> response;
         try {
             response = restTemplate.getForEntity(request, GetGifResponseDto.class);
         } catch (RestClientException e) {
