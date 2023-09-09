@@ -38,6 +38,7 @@ public class CurrencyServiceFeignImpl implements CurrencyService {
             histResponse = currencyClient.getHistoricalRate(localDateYesterday.toString(), apiKey, baseCurrency, comparedCurrency);
             latestResponse = currencyClient.getLatestRate(apiKey, baseCurrency, comparedCurrency);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CurrencyServiceException();
         }
 

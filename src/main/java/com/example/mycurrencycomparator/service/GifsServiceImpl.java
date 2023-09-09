@@ -40,6 +40,7 @@ public class GifsServiceImpl implements GifsService {
         try {
             response = restTemplate.getForEntity(request, GetGifResponseDto.class);
         } catch (RestClientException e) {
+            e.printStackTrace();
             throw new GifsServiceException();
         }
 

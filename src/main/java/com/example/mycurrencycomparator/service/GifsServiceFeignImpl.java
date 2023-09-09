@@ -31,6 +31,7 @@ public class GifsServiceFeignImpl implements GifsService {
         try {
             response = gifClient.getGif(apiKey, qWord, "1", offset.toString(), "messaging_non_clips");
         } catch (Exception e) {
+            e.printStackTrace();
             throw new GifsServiceException();
         }
 

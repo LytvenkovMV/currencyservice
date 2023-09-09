@@ -50,6 +50,7 @@ public class CurrencyServiceImpl implements CurrencyService {
             histResponse = restTemplate.getForEntity(histRequest, ExchApiResponseDto.class);
             latestResponse = restTemplate.getForEntity(latestRequest, ExchApiResponseDto.class);
         } catch (RestClientException e) {
+            e.printStackTrace();
             throw new CurrencyServiceException();
         }
 
