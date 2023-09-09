@@ -181,7 +181,7 @@ class GifsServiceImplTest {
         PaginationDto paginationDto = new PaginationDto();
         paginationDto.setTotal_count(1);
         paginationDto.setCount(1);
-        paginationDto.setOffset(33);
+        paginationDto.setOffset(1);
 
         MetaDto metaDto = new MetaDto();
         metaDto.setMsg("meta_message");
@@ -197,7 +197,7 @@ class GifsServiceImplTest {
         String p1 = "api_key=" + apiKey;
         String p2 = "q=" + "anything";
         String p3 = "limit=" + 1;
-        String p4 = "offset=" + 33;
+        String p4 = "offset=" + 1;
         String p5 = "bundle=" + "messaging_non_clips";
         String request = url + "?" + p1 + "&" + p2 + "&" + p3 + "&" + p4 + "&" + p5;
 

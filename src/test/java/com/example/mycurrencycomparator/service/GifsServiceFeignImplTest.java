@@ -177,7 +177,7 @@ class GifsServiceFeignImplTest {
         PaginationDto paginationDto = new PaginationDto();
         paginationDto.setTotal_count(1);
         paginationDto.setCount(1);
-        paginationDto.setOffset(33);
+        paginationDto.setOffset(1);
 
         MetaDto metaDto = new MetaDto();
         metaDto.setMsg("meta_message");
@@ -190,7 +190,7 @@ class GifsServiceFeignImplTest {
         getGifResponseDto.setMeta(metaDto);
 
         Mockito
-                .when(gifClient.getGif(apiKey, "anything", "1", "33", "messaging_non_clips"))
+                .when(gifClient.getGif(apiKey, "anything", "1", "1", "messaging_non_clips"))
                 .thenReturn(new ResponseEntity(getGifResponseDto, HttpStatus.OK));
 
 
