@@ -5,6 +5,7 @@ import com.example.mycurrencycomparator.dto.currencyrate.CompareCurrencyResponse
 import com.example.mycurrencycomparator.dto.gif.GetGifResponseDto;
 import com.example.mycurrencycomparator.enumerator.CurrencyCodes;
 import com.example.mycurrencycomparator.exception.WrongCodeException;
+import com.example.mycurrencycomparator.mapper.MapStructMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,9 @@ public class MyComparatorServiceImpl implements MyComparatorService {
     @Autowired
     private GifsService gifsService;
 
+    @Autowired
+    MapStructMapper mapStructMapper;
+
     @Override
     public ResponseEntity<MyComparatorResponseDto> compare(Optional<String> code) {
 
@@ -38,7 +42,8 @@ public class MyComparatorServiceImpl implements MyComparatorService {
         String qWord = compareCurrencyResponseEntity.getBody().getCompareResult();
         ResponseEntity<GetGifResponseDto> getGifResponseEntity = gifsService.getGif(qWord);
 
-        MyComparatorResponseDto responseDto = DtoMapper.getMyComparatorResponseDto(compareCurrencyResponseEntity.getBody(), getGifResponseEntity.getBody());
+        MyComparatorResponseDto responseDto = mapStructMapper.fromCompareCurrencyAndGetGifResponseDto(compareCurrencyResponseEntity.getBody()
+                , getGifResponseEntity.getBody());
 
         return ResponseEntity.ok(responseDto);
     }
