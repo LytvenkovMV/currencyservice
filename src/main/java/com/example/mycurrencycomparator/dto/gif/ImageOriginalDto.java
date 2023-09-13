@@ -1,5 +1,6 @@
 package com.example.mycurrencycomparator.dto.gif;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,13 +24,15 @@ public class ImageOriginalDto {
     private String url;
 
     @ApiModelProperty(value = "Размер mp4", required = true)
-    private String mp4_size;
+    @JsonProperty(value = "mp4_size")
+    private String mp4Size;
 
     @ApiModelProperty(value = "Ссылка mp4", required = true)
     private String mp4;
 
     @ApiModelProperty(value = "Размер webp", required = true)
-    private String webp_size;
+    @JsonProperty(value = "webp_size")
+    private String webpSize;
 
     @ApiModelProperty(value = "Ссылка webp", required = true)
     private String webp;

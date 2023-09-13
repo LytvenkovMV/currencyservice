@@ -35,7 +35,7 @@ public class MyComparatorServiceImpl implements MyComparatorService {
 
         ResponseEntity<CompareCurrencyResponseDto> compareCurrencyResponseEntity = currencyService.getCompareResult(comparedCurrency);
 
-        String qWord = compareCurrencyResponseEntity.getBody().getCompare_result();
+        String qWord = compareCurrencyResponseEntity.getBody().getCompareResult();
         ResponseEntity<GetGifResponseDto> getGifResponseEntity = gifsService.getGif(qWord);
 
         MyComparatorResponseDto responseDto = DtoMapper.getMyComparatorResponseDto(compareCurrencyResponseEntity.getBody(), getGifResponseEntity.getBody());

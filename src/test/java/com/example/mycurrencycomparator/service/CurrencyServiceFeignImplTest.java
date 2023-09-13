@@ -93,12 +93,12 @@ class CurrencyServiceFeignImplTest {
 
         //when
 
-        assertEquals(baseCurrency, respEntity.getBody().getBase_currency());
-        assertEquals("RUB", respEntity.getBody().getCompared_currency());
-        assertEquals("broke", respEntity.getBody().getCompare_result());
-        assertEquals(dateToday.toString(), respEntity.getBody().getRate_data().get(0).getDate());
-        assertEquals(95.02, respEntity.getBody().getRate_data().get(0).getRate());
-        assertEquals(dateYesterday.toString(), respEntity.getBody().getRate_data().get(1).getDate());
-        assertEquals(95.01, respEntity.getBody().getRate_data().get(1).getRate());
+        assertEquals(baseCurrency, respEntity.getBody().getBaseCurrency());
+        assertEquals("RUB", respEntity.getBody().getComparedCurrency());
+        assertEquals("broke", respEntity.getBody().getCompareResult());
+        assertEquals(dateToday.toString(), respEntity.getBody().getRateData().get(0).getDate());
+        assertEquals(95.02, respEntity.getBody().getRateData().get(0).getRate());
+        assertEquals(dateYesterday.toString(), respEntity.getBody().getRateData().get(1).getDate());
+        assertEquals(95.01, respEntity.getBody().getRateData().get(1).getRate());
     }
 }

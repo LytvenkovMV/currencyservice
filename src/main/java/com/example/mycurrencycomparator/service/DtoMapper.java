@@ -38,10 +38,10 @@ public class DtoMapper {
         rateData.add(histRateData);
 
         CompareCurrencyResponseDto compareCurrencyResponseDto = new CompareCurrencyResponseDto();
-        compareCurrencyResponseDto.setBase_currency(latestResponseDto.getBase());
-        compareCurrencyResponseDto.setCompared_currency(comparedCurrency);
-        compareCurrencyResponseDto.setRate_data(rateData);
-        compareCurrencyResponseDto.setCompare_result(compareResult);
+        compareCurrencyResponseDto.setBaseCurrency(latestResponseDto.getBase());
+        compareCurrencyResponseDto.setComparedCurrency(comparedCurrency);
+        compareCurrencyResponseDto.setRateData(rateData);
+        compareCurrencyResponseDto.setCompareResult(compareResult);
 
         return compareCurrencyResponseDto;
     }
@@ -52,11 +52,11 @@ public class DtoMapper {
             , GetGifResponseDto getGifResponseDto) {
 
         MyComparatorResponseDto myComparatorResponseDto = new MyComparatorResponseDto();
-        myComparatorResponseDto.setCompared_currency(compareCurrencyResponseDto.getCompared_currency());
-        myComparatorResponseDto.setBase_currency(compareCurrencyResponseDto.getBase_currency());
-        myComparatorResponseDto.setCompare_result(compareCurrencyResponseDto.getCompare_result());
-        myComparatorResponseDto.setRate_data(compareCurrencyResponseDto.getRate_data());
-        myComparatorResponseDto.setGif_title(getGifResponseDto.getData().get(0).getTitle());
+        myComparatorResponseDto.setComparedCurrency(compareCurrencyResponseDto.getComparedCurrency());
+        myComparatorResponseDto.setBaseCurrency(compareCurrencyResponseDto.getBaseCurrency());
+        myComparatorResponseDto.setCompareResult(compareCurrencyResponseDto.getCompareResult());
+        myComparatorResponseDto.setRateData(compareCurrencyResponseDto.getRateData());
+        myComparatorResponseDto.setGifTitle(getGifResponseDto.getData().get(0).getTitle());
         myComparatorResponseDto.setImages(getGifResponseDto.getData().get(0).getImages());
 
         return myComparatorResponseDto;

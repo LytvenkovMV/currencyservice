@@ -63,13 +63,13 @@ class DtoMapperTest {
 
         //when
 
-        assertEquals("rich", responseDto.getCompare_result());
-        assertEquals("ALL", responseDto.getCompared_currency());
-        assertEquals("USD", responseDto.getBase_currency());
-        assertEquals("2020-01-22", responseDto.getRate_data().get(0).getDate());
-        assertEquals("2020-01-21", responseDto.getRate_data().get(1).getDate());
-        assertEquals(95.01, responseDto.getRate_data().get(0).getRate());
-        assertEquals(95.02, responseDto.getRate_data().get(1).getRate());
+        assertEquals("rich", responseDto.getCompareResult());
+        assertEquals("ALL", responseDto.getComparedCurrency());
+        assertEquals("USD", responseDto.getBaseCurrency());
+        assertEquals("2020-01-22", responseDto.getRateData().get(0).getDate());
+        assertEquals("2020-01-21", responseDto.getRateData().get(1).getDate());
+        assertEquals(95.01, responseDto.getRateData().get(0).getRate());
+        assertEquals(95.02, responseDto.getRateData().get(1).getRate());
     }
 
     @Test
@@ -86,10 +86,10 @@ class DtoMapperTest {
         rateData.add(histRateDataDto);
 
         CompareCurrencyResponseDto compareCurrencyResponseDto = new CompareCurrencyResponseDto();
-        compareCurrencyResponseDto.setBase_currency("USD");
-        compareCurrencyResponseDto.setCompared_currency("RUB");
-        compareCurrencyResponseDto.setCompare_result("broke");
-        compareCurrencyResponseDto.setRate_data(rateData);
+        compareCurrencyResponseDto.setBaseCurrency("USD");
+        compareCurrencyResponseDto.setComparedCurrency("RUB");
+        compareCurrencyResponseDto.setCompareResult("broke");
+        compareCurrencyResponseDto.setRateData(rateData);
 
 
         ImageOriginalDto imageOriginalDto = new ImageOriginalDto();
@@ -97,9 +97,9 @@ class DtoMapperTest {
         imageOriginalDto.setWidth("width_o");
         imageOriginalDto.setSize("size_o");
         imageOriginalDto.setUrl("url_o");
-        imageOriginalDto.setMp4_size("mp4_size_o");
+        imageOriginalDto.setMp4Size("mp4_size_o");
         imageOriginalDto.setMp4("mp4_o");
-        imageOriginalDto.setWebp_size("webp_size_o");
+        imageOriginalDto.setWebpSize("webp_size_o");
         imageOriginalDto.setWebp("webp_o");
         imageOriginalDto.setFrames("frames");
         imageOriginalDto.setHash("hash");
@@ -109,9 +109,9 @@ class DtoMapperTest {
         imageFixedHeightDto.setWidth("width_fh");
         imageFixedHeightDto.setSize("size_fh");
         imageFixedHeightDto.setUrl("url_fh");
-        imageFixedHeightDto.setMp4_size("mp4_size_fh");
+        imageFixedHeightDto.setMp4Size("mp4_size_fh");
         imageFixedHeightDto.setMp4("mp4_fh");
-        imageFixedHeightDto.setWebp_size("webp_size_fh");
+        imageFixedHeightDto.setWebpSize("webp_size_fh");
         imageFixedHeightDto.setWebp("webp_fh");
 
         ImageFixedDownsampledDto imageFixedHeihgtDownsampledDto = new ImageFixedDownsampledDto();
@@ -119,7 +119,7 @@ class DtoMapperTest {
         imageFixedHeihgtDownsampledDto.setWidth("width_fhd");
         imageFixedHeihgtDownsampledDto.setSize("size_fhd");
         imageFixedHeihgtDownsampledDto.setUrl("url_fhd");
-        imageFixedHeihgtDownsampledDto.setWebp_size("webp_size_fhd");
+        imageFixedHeihgtDownsampledDto.setWebpSize("webp_size_fhd");
         imageFixedHeihgtDownsampledDto.setWebp("webp_fhd");
 
         ImageFixedDto imageFixedHeightSmallDto = new ImageFixedDto();
@@ -127,9 +127,9 @@ class DtoMapperTest {
         imageFixedHeightSmallDto.setWidth("width_fhs");
         imageFixedHeightSmallDto.setSize("size_fhs");
         imageFixedHeightSmallDto.setUrl("url_fhs");
-        imageFixedHeightSmallDto.setMp4_size("mp4_size_fhs");
+        imageFixedHeightSmallDto.setMp4Size("mp4_size_fhs");
         imageFixedHeightSmallDto.setMp4("mp4_fhs");
-        imageFixedHeightSmallDto.setWebp_size("webp_size_fhs");
+        imageFixedHeightSmallDto.setWebpSize("webp_size_fhs");
         imageFixedHeightSmallDto.setWebp("webp_fhs");
 
         ImageFixedDto imageFixedWidthDto = new ImageFixedDto();
@@ -137,9 +137,9 @@ class DtoMapperTest {
         imageFixedWidthDto.setWidth("width_fw");
         imageFixedWidthDto.setSize("size_fw");
         imageFixedWidthDto.setUrl("url_fw");
-        imageFixedWidthDto.setMp4_size("mp4_size_fw");
+        imageFixedWidthDto.setMp4Size("mp4_size_fw");
         imageFixedWidthDto.setMp4("mp4_fw");
-        imageFixedWidthDto.setWebp_size("webp_size_fw");
+        imageFixedWidthDto.setWebpSize("webp_size_fw");
         imageFixedWidthDto.setWebp("webp_fw");
 
         ImageFixedDownsampledDto imageFixedWidthDownsampledDto = new ImageFixedDownsampledDto();
@@ -147,7 +147,7 @@ class DtoMapperTest {
         imageFixedWidthDownsampledDto.setWidth("width_fwd");
         imageFixedWidthDownsampledDto.setSize("size_fwd");
         imageFixedWidthDownsampledDto.setUrl("url_fwd");
-        imageFixedWidthDownsampledDto.setWebp_size("webp_size_fwd");
+        imageFixedWidthDownsampledDto.setWebpSize("webp_size_fwd");
         imageFixedWidthDownsampledDto.setWebp("webp_fwd");
 
         ImageFixedDto imageFixedWidthSmallDto = new ImageFixedDto();
@@ -155,19 +155,19 @@ class DtoMapperTest {
         imageFixedWidthSmallDto.setWidth("width_fws");
         imageFixedWidthSmallDto.setSize("size_fws");
         imageFixedWidthSmallDto.setUrl("url_fws");
-        imageFixedWidthSmallDto.setMp4_size("mp4_size_fws");
+        imageFixedWidthSmallDto.setMp4Size("mp4_size_fws");
         imageFixedWidthSmallDto.setMp4("mp4_fws");
-        imageFixedWidthSmallDto.setWebp_size("webp_size_fws");
+        imageFixedWidthSmallDto.setWebpSize("webp_size_fws");
         imageFixedWidthSmallDto.setWebp("webp_fws");
 
         ImagesDto imagesDto = new ImagesDto();
         imagesDto.setOriginal(imageOriginalDto);
-        imagesDto.setFixed_height(imageFixedHeightDto);
-        imagesDto.setFixed_height_downsampled(imageFixedHeihgtDownsampledDto);
-        imagesDto.setFixed_height_small(imageFixedHeightSmallDto);
-        imagesDto.setFixed_width(imageFixedWidthDto);
-        imagesDto.setFixed_width_downsampled(imageFixedWidthDownsampledDto);
-        imagesDto.setFixed_width_small(imageFixedWidthSmallDto);
+        imagesDto.setFixedHeight(imageFixedHeightDto);
+        imagesDto.setFixedHeightDownsampled(imageFixedHeihgtDownsampledDto);
+        imagesDto.setFixedHeightSmall(imageFixedHeightSmallDto);
+        imagesDto.setFixedWidth(imageFixedWidthDto);
+        imagesDto.setFixedWidthDownsampled(imageFixedWidthDownsampledDto);
+        imagesDto.setFixedWidthSmall(imageFixedWidthSmallDto);
 
         GifDto gifDto = new GifDto();
         gifDto.setTitle("title1");
@@ -187,14 +187,14 @@ class DtoMapperTest {
 
         //when
 
-        assertEquals("title1", responseDto.getGif_title());
-        assertEquals("RUB", responseDto.getCompared_currency());
-        assertEquals("USD", responseDto.getBase_currency());
-        assertEquals("broke", responseDto.getCompare_result());
-        assertEquals("2020-02-12", responseDto.getRate_data().get(0).getDate());
-        assertEquals("2020-02-11", responseDto.getRate_data().get(1).getDate());
-        assertEquals(95.02, responseDto.getRate_data().get(0).getRate());
-        assertEquals(95.01, responseDto.getRate_data().get(1).getRate());
+        assertEquals("title1", responseDto.getGifTitle());
+        assertEquals("RUB", responseDto.getComparedCurrency());
+        assertEquals("USD", responseDto.getBaseCurrency());
+        assertEquals("broke", responseDto.getCompareResult());
+        assertEquals("2020-02-12", responseDto.getRateData().get(0).getDate());
+        assertEquals("2020-02-11", responseDto.getRateData().get(1).getDate());
+        assertEquals(95.02, responseDto.getRateData().get(0).getRate());
+        assertEquals(95.01, responseDto.getRateData().get(1).getRate());
         assertEquals(imagesDto, responseDto.getImages());
     }
 }

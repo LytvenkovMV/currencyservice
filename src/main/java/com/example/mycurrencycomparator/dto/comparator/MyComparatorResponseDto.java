@@ -19,19 +19,19 @@ import java.util.List;
 public class MyComparatorResponseDto {
 
     @ApiModelProperty(value = "Валюта, заданная в запросе", required = true)
-    private String compared_currency;
+    private String comparedCurrency;
 
     @ApiModelProperty(value = "Базовая валюта", required = true)
-    private String base_currency;
+    private String baseCurrency;
 
     @ApiModelProperty(value = "Результат сравнения", required = true)
-    private String compare_result;
+    private String compareResult;
 
     @ApiModelProperty(value = "Информация о курсах валюты за разные даты", required = true)
-    private List<RateDataDto> rate_data;
+    private List<RateDataDto> rateData;
 
     @ApiModelProperty(value = "Название гифки", required = true)
-    private String gif_title;
+    private String gifTitle;
 
     @ApiModelProperty(value = "Ссылки на гифки", required = true)
     private ImagesDto images;

@@ -1,5 +1,6 @@
 package com.example.mycurrencycomparator.dto.gif;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,9 @@ import lombok.NoArgsConstructor;
 public class MetaDto {
 
     private int status;
+
     private String msg;
-    private String response_id;
+
+    @JsonProperty(value = "response_id")
+    private String responseId;
 }

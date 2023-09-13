@@ -57,10 +57,10 @@ class MyComparatorServiceImplTest {
         rateData.add(histRateDataDto);
 
         CompareCurrencyResponseDto compareCurrencyResponseDto = new CompareCurrencyResponseDto();
-        compareCurrencyResponseDto.setBase_currency(baseCurrency);
-        compareCurrencyResponseDto.setCompared_currency("RUB");
-        compareCurrencyResponseDto.setCompare_result("rich");
-        compareCurrencyResponseDto.setRate_data(rateData);
+        compareCurrencyResponseDto.setBaseCurrency(baseCurrency);
+        compareCurrencyResponseDto.setComparedCurrency("RUB");
+        compareCurrencyResponseDto.setCompareResult("rich");
+        compareCurrencyResponseDto.setRateData(rateData);
 
         Mockito
                 .when(currencyService.getCompareResult("RUB"))
@@ -81,25 +81,25 @@ class MyComparatorServiceImplTest {
         analyticsDto.setOnsent(analyticsOnsentDto);
 
         UserDto userDto = new UserDto();
-        userDto.setAvatar_url("avatar_url");
-        userDto.setBanner_image("banner_image");
-        userDto.setBanner_url("banner_url");
-        userDto.setProfile_url("profile_url");
+        userDto.setAvatarUrl("avatar_url");
+        userDto.setBannerImage("banner_image");
+        userDto.setBannerUrl("banner_url");
+        userDto.setProfileUrl("profile_url");
         userDto.setUsername("username");
-        userDto.setDisplay_name("display_name");
+        userDto.setDisplayName("display_name");
         userDto.setDescription("description");
-        userDto.setInstagram_url("instagram_url");
-        userDto.setWebsite_url("website_url");
-        userDto.setIs_verified("is_verified");
+        userDto.setInstagramUrl("instagram_url");
+        userDto.setWebsiteUrl("website_url");
+        userDto.setIsVerified("is_verified");
 
         ImageOriginalDto imageOriginalDto = new ImageOriginalDto();
         imageOriginalDto.setHeight("height_o");
         imageOriginalDto.setWidth("width_o");
         imageOriginalDto.setSize("size_o");
         imageOriginalDto.setUrl("url_o");
-        imageOriginalDto.setMp4_size("mp4_size_o");
+        imageOriginalDto.setMp4Size("mp4_size_o");
         imageOriginalDto.setMp4("mp4_o");
-        imageOriginalDto.setWebp_size("webp_size_o");
+        imageOriginalDto.setWebpSize("webp_size_o");
         imageOriginalDto.setWebp("webp_o");
         imageOriginalDto.setFrames("frames");
         imageOriginalDto.setHash("hash");
@@ -109,9 +109,9 @@ class MyComparatorServiceImplTest {
         imageFixedHeightDto.setWidth("width_fh");
         imageFixedHeightDto.setSize("size_fh");
         imageFixedHeightDto.setUrl("url_fh");
-        imageFixedHeightDto.setMp4_size("mp4_size_fh");
+        imageFixedHeightDto.setMp4Size("mp4_size_fh");
         imageFixedHeightDto.setMp4("mp4_fh");
-        imageFixedHeightDto.setWebp_size("webp_size_fh");
+        imageFixedHeightDto.setWebpSize("webp_size_fh");
         imageFixedHeightDto.setWebp("webp_fh");
 
         ImageFixedDownsampledDto imageFixedHeihgtDownsampledDto = new ImageFixedDownsampledDto();
@@ -119,7 +119,7 @@ class MyComparatorServiceImplTest {
         imageFixedHeihgtDownsampledDto.setWidth("width_fhd");
         imageFixedHeihgtDownsampledDto.setSize("size_fhd");
         imageFixedHeihgtDownsampledDto.setUrl("url_fhd");
-        imageFixedHeihgtDownsampledDto.setWebp_size("webp_size_fhd");
+        imageFixedHeihgtDownsampledDto.setWebpSize("webp_size_fhd");
         imageFixedHeihgtDownsampledDto.setWebp("webp_fhd");
 
         ImageFixedDto imageFixedHeightSmallDto = new ImageFixedDto();
@@ -127,9 +127,9 @@ class MyComparatorServiceImplTest {
         imageFixedHeightSmallDto.setWidth("width_fhs");
         imageFixedHeightSmallDto.setSize("size_fhs");
         imageFixedHeightSmallDto.setUrl("url_fhs");
-        imageFixedHeightSmallDto.setMp4_size("mp4_size_fhs");
+        imageFixedHeightSmallDto.setMp4Size("mp4_size_fhs");
         imageFixedHeightSmallDto.setMp4("mp4_fhs");
-        imageFixedHeightSmallDto.setWebp_size("webp_size_fhs");
+        imageFixedHeightSmallDto.setWebpSize("webp_size_fhs");
         imageFixedHeightSmallDto.setWebp("webp_fhs");
 
         ImageFixedDto imageFixedWidthDto = new ImageFixedDto();
@@ -137,9 +137,9 @@ class MyComparatorServiceImplTest {
         imageFixedWidthDto.setWidth("width_fw");
         imageFixedWidthDto.setSize("size_fw");
         imageFixedWidthDto.setUrl("url_fw");
-        imageFixedWidthDto.setMp4_size("mp4_size_fw");
+        imageFixedWidthDto.setMp4Size("mp4_size_fw");
         imageFixedWidthDto.setMp4("mp4_fw");
-        imageFixedWidthDto.setWebp_size("webp_size_fw");
+        imageFixedWidthDto.setWebpSize("webp_size_fw");
         imageFixedWidthDto.setWebp("webp_fw");
 
         ImageFixedDownsampledDto imageFixedWidthDownsampledDto = new ImageFixedDownsampledDto();
@@ -147,7 +147,7 @@ class MyComparatorServiceImplTest {
         imageFixedWidthDownsampledDto.setWidth("width_fwd");
         imageFixedWidthDownsampledDto.setSize("size_fwd");
         imageFixedWidthDownsampledDto.setUrl("url_fwd");
-        imageFixedWidthDownsampledDto.setWebp_size("webp_size_fwd");
+        imageFixedWidthDownsampledDto.setWebpSize("webp_size_fwd");
         imageFixedWidthDownsampledDto.setWebp("webp_fwd");
 
         ImageFixedDto imageFixedWidthSmallDto = new ImageFixedDto();
@@ -155,53 +155,53 @@ class MyComparatorServiceImplTest {
         imageFixedWidthSmallDto.setWidth("width_fws");
         imageFixedWidthSmallDto.setSize("size_fws");
         imageFixedWidthSmallDto.setUrl("url_fws");
-        imageFixedWidthSmallDto.setMp4_size("mp4_size_fws");
+        imageFixedWidthSmallDto.setMp4Size("mp4_size_fws");
         imageFixedWidthSmallDto.setMp4("mp4_fws");
-        imageFixedWidthSmallDto.setWebp_size("webp_size_fws");
+        imageFixedWidthSmallDto.setWebpSize("webp_size_fws");
         imageFixedWidthSmallDto.setWebp("webp_fws");
 
         ImagesDto imagesDto = new ImagesDto();
         imagesDto.setOriginal(imageOriginalDto);
-        imagesDto.setFixed_height(imageFixedHeightDto);
-        imagesDto.setFixed_height_downsampled(imageFixedHeihgtDownsampledDto);
-        imagesDto.setFixed_height_small(imageFixedHeightSmallDto);
-        imagesDto.setFixed_width(imageFixedWidthDto);
-        imagesDto.setFixed_width_downsampled(imageFixedWidthDownsampledDto);
-        imagesDto.setFixed_width_small(imageFixedWidthSmallDto);
+        imagesDto.setFixedHeight(imageFixedHeightDto);
+        imagesDto.setFixedHeightDownsampled(imageFixedHeihgtDownsampledDto);
+        imagesDto.setFixedHeightSmall(imageFixedHeightSmallDto);
+        imagesDto.setFixedWidth(imageFixedWidthDto);
+        imagesDto.setFixedWidthDownsampled(imageFixedWidthDownsampledDto);
+        imagesDto.setFixedWidthSmall(imageFixedWidthSmallDto);
 
         GifDto gifDto = new GifDto();
         gifDto.setType("type");
         gifDto.setId("id");
         gifDto.setUrl("url");
-        gifDto.setBitly_gif_url("bitly_gif_url");
-        gifDto.setBitly_url("bitly_url");
-        gifDto.setEmbed_url("embed_url");
+        gifDto.setBitlyGifUrl("bitly_gif_url");
+        gifDto.setBitlyUrl("bitly_url");
+        gifDto.setEmbedUrl("embed_url");
         gifDto.setUsername("username");
         gifDto.setSource("source");
         gifDto.setTitle("title");
         gifDto.setRating("rating");
-        gifDto.setContent_url("content_url");
-        gifDto.setSource_tld("source_tld");
-        gifDto.setSource_post_url("source_post_url");
-        gifDto.setIs_sticker(0);
-        gifDto.setImport_datetime("import_datetime");
-        gifDto.setTrending_datetime("trending_datetime");
+        gifDto.setContentUrl("content_url");
+        gifDto.setSourceTld("source_tld");
+        gifDto.setSourcePostUrl("source_post_url");
+        gifDto.setIsSticker(0);
+        gifDto.setImportDateTime("import_datetime");
+        gifDto.setTrendingDateTime("trending_datetime");
         gifDto.setImages(imagesDto);
         gifDto.setUser(userDto);
-        gifDto.setAnalytics_response_payload("analytics_payload");
+        gifDto.setAnalyticsResponsePayload("analytics_payload");
         gifDto.setAnalytics(analyticsDto);
 
         ArrayList<GifDto> data = new ArrayList<>();
         data.add(gifDto);
 
         PaginationDto paginationDto = new PaginationDto();
-        paginationDto.setTotal_count(1);
+        paginationDto.setTotalCount(1);
         paginationDto.setCount(1);
-        paginationDto.setOffset(33);
+        paginationDto.setOffset(1);
 
         MetaDto metaDto = new MetaDto();
         metaDto.setMsg("meta_message");
-        metaDto.setResponse_id("meta_id");
+        metaDto.setResponseId("meta_id");
         metaDto.setStatus(200);
 
         GetGifResponseDto getGifResponseDto = new GetGifResponseDto();
@@ -221,14 +221,14 @@ class MyComparatorServiceImplTest {
 
         //when
 
-        assertEquals(baseCurrency, respEntity.getBody().getBase_currency());
-        assertEquals("RUB", respEntity.getBody().getCompared_currency());
-        assertEquals("rich", respEntity.getBody().getCompare_result());
-        assertEquals(dateToday.toString(), respEntity.getBody().getRate_data().get(0).getDate());
-        assertEquals(95.01, respEntity.getBody().getRate_data().get(0).getRate());
-        assertEquals(dateYesterday.toString(), respEntity.getBody().getRate_data().get(1).getDate());
-        assertEquals(95.02, respEntity.getBody().getRate_data().get(1).getRate());
-        assertEquals("title", respEntity.getBody().getGif_title());
+        assertEquals(baseCurrency, respEntity.getBody().getBaseCurrency());
+        assertEquals("RUB", respEntity.getBody().getComparedCurrency());
+        assertEquals("rich", respEntity.getBody().getCompareResult());
+        assertEquals(dateToday.toString(), respEntity.getBody().getRateData().get(0).getDate());
+        assertEquals(95.01, respEntity.getBody().getRateData().get(0).getRate());
+        assertEquals(dateYesterday.toString(), respEntity.getBody().getRateData().get(1).getDate());
+        assertEquals(95.02, respEntity.getBody().getRateData().get(1).getRate());
+        assertEquals("title", respEntity.getBody().getGifTitle());
         assertEquals(imagesDto, respEntity.getBody().getImages());
     }
 }

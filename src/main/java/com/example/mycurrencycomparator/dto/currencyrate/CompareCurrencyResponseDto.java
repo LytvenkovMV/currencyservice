@@ -1,5 +1,6 @@
 package com.example.mycurrencycomparator.dto.currencyrate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 public class CompareCurrencyResponseDto {
 
-    private String base_currency;
-    private String compared_currency;
-    private String compare_result;
-    private List<RateDataDto> rate_data;
+    private String baseCurrency;
+
+    private String comparedCurrency;
+
+    private String compareResult;
+
+    private List<RateDataDto> rateData;
 }
