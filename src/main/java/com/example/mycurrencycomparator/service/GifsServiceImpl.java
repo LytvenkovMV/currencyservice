@@ -28,7 +28,7 @@ public class GifsServiceImpl implements GifsService {
     @Override
     public ResponseEntity<GetGifResponseDto> getGif(String qWord) {
 
-        Integer offset = new Random().nextInt(1) + 1;
+        Integer offset = new Random().nextInt(99) + 1;
         String p1 = "api_key=" + apiKey;
         String p2 = "q=" + qWord;
         String p3 = "limit=" + 1;

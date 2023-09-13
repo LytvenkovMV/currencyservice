@@ -25,7 +25,7 @@ public class GifsServiceFeignImpl implements GifsService {
     @Override
     public ResponseEntity<GetGifResponseDto> getGif(String qWord) {
 
-        Integer offset = new Random().nextInt(1) + 1;
+        Integer offset = new Random().nextInt(99) + 1;
 
         ResponseEntity<GetGifResponseDto> response;
         try {
