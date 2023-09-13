@@ -4,9 +4,9 @@ import com.example.mycurrencycomparator.client.CurrencyClient;
 import com.example.mycurrencycomparator.dto.currencyrate.CompareCurrencyResponseDto;
 import com.example.mycurrencycomparator.dto.currencyrate.ExchApiResponseDto;
 import com.example.mycurrencycomparator.exception.CurrencyServiceException;
+import com.example.mycurrencycomparator.mapper.MapStructMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,6 +26,9 @@ public class CurrencyServiceFeignImpl implements CurrencyService {
     @Autowired
     private CurrencyClient currencyClient;
 
+    @Autowired
+    private MapStructMapper mapStructMapper;
+
     @Override
     public ResponseEntity<CompareCurrencyResponseDto> getCompareResult(String comparedCurrency) {
 
@@ -42,7 +45,12 @@ public class CurrencyServiceFeignImpl implements CurrencyService {
             throw new CurrencyServiceException();
         }
 
-        CompareCurrencyResponseDto responseDto = DtoMapper.getCompareCurrencyResponseDto(comparedCurrency, localDateToday, localDateYesterday, histResponse.getBody(), latestResponse.getBody());
+        CompareCurrencyResponseDto responseDto = mapStructMapper.fromComparedCurrencyAndDatesAndExchApiResponseDtos(
+                comparedCurrency
+                , localDateToday
+                , localDateYesterday
+                , histResponse.getBody()
+                , latestResponse.getBody());
 
         return ResponseEntity.ok(responseDto);
     }

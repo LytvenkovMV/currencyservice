@@ -3,6 +3,7 @@ package com.example.mycurrencycomparator.service;
 import com.example.mycurrencycomparator.dto.currencyrate.CompareCurrencyResponseDto;
 import com.example.mycurrencycomparator.dto.currencyrate.ExchApiResponseDto;
 import com.example.mycurrencycomparator.exception.CurrencyServiceException;
+import com.example.mycurrencycomparator.mapper.MapStructMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -31,6 +32,9 @@ public class CurrencyServiceImpl implements CurrencyService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private MapStructMapper mapStructMapper;
+
     @Override
     public ResponseEntity<CompareCurrencyResponseDto> getCompareResult(String comparedCurrency) {
 
@@ -54,7 +58,12 @@ public class CurrencyServiceImpl implements CurrencyService {
             throw new CurrencyServiceException();
         }
 
-        CompareCurrencyResponseDto responseDto = DtoMapper.getCompareCurrencyResponseDto(comparedCurrency, localDateToday, localDateYesterday, histResponse.getBody(), latestResponse.getBody());
+        CompareCurrencyResponseDto responseDto = mapStructMapper.fromComparedCurrencyAndDatesAndExchApiResponseDtos(
+                comparedCurrency
+                , localDateToday
+                , localDateYesterday
+                , histResponse.getBody()
+                , latestResponse.getBody());
 
         return ResponseEntity.ok(responseDto);
     }

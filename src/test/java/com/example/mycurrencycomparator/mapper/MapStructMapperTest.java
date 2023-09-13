@@ -1,4 +1,4 @@
-package com.example.mycurrencycomparator.service;
+package com.example.mycurrencycomparator.mapper;
 
 import com.example.mycurrencycomparator.dto.comparator.MyComparatorResponseDto;
 import com.example.mycurrencycomparator.dto.currencyrate.CompareCurrencyResponseDto;
@@ -6,6 +6,7 @@ import com.example.mycurrencycomparator.dto.currencyrate.ExchApiResponseDto;
 import com.example.mycurrencycomparator.dto.currencyrate.RateDataDto;
 import com.example.mycurrencycomparator.dto.gif.*;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
@@ -17,10 +18,13 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class DtoMapperTest {
+class MapStructMapperTest {
+
+    @Autowired
+    MapStructMapper mapStructMapper;
 
     @Test
-    void getCompareCurrencyResponseDto() {
+    void fromComparedCurrencyAndDatesAndExchApiResponseDtos() {
 
 
         //given
@@ -52,7 +56,8 @@ class DtoMapperTest {
 
         //then
 
-        CompareCurrencyResponseDto responseDto = DtoMapper.getCompareCurrencyResponseDto(comparedCurrency
+        CompareCurrencyResponseDto responseDto = mapStructMapper.fromComparedCurrencyAndDatesAndExchApiResponseDtos(
+                comparedCurrency
                 , localDateToday
                 , localDateYesterday
                 , histResponseDto
@@ -71,7 +76,7 @@ class DtoMapperTest {
     }
 
     @Test
-    void getMyComparatorResponseDto() {
+    void fromCompareCurrencyAndGetGifResponseDto() {
 
 
         //given
@@ -180,7 +185,8 @@ class DtoMapperTest {
 
         //then
 
-        MyComparatorResponseDto responseDto = DtoMapper.getMyComparatorResponseDto(compareCurrencyResponseDto, getGifResponseDto);
+        MyComparatorResponseDto responseDto = mapStructMapper.fromCompareCurrencyAndGetGifResponseDto(
+                compareCurrencyResponseDto, getGifResponseDto);
 
 
         //when
