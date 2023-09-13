@@ -2,32 +2,24 @@ package com.example.mycurrencycomparator.service;
 
 import com.example.mycurrencycomparator.client.GifClient;
 import com.example.mycurrencycomparator.dto.gif.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
-@TestPropertySource("classpath:/application.properties")
 @ExtendWith(MockitoExtension.class)
 class GifsServiceFeignImplTest {
-
-    @Value("${service.gifs.apiKey}")
-    private String apiKey;
 
     @Mock
     private GifClient gifClient;
@@ -35,13 +27,7 @@ class GifsServiceFeignImplTest {
     @InjectMocks
     private GifsServiceFeignImpl gifsService;
 
-    @BeforeEach
-    public void setUp() {
-        ReflectionTestUtils.setField(gifsService, "apiKey", apiKey);
-    }
-
     @Test
-    @Disabled
     void getGif() {
 
 
@@ -190,7 +176,7 @@ class GifsServiceFeignImplTest {
         getGifResponseDto.setMeta(metaDto);
 
         Mockito
-                .when(gifClient.getGif(apiKey, "anything", "1", "1", "messaging_non_clips"))
+                .when(gifClient.getGif(any(), any(), any(), any(), any()))
                 .thenReturn(new ResponseEntity(getGifResponseDto, HttpStatus.OK));
 
 

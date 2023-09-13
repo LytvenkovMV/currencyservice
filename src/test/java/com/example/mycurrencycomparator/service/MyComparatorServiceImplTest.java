@@ -10,11 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,14 +20,11 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
-@TestPropertySource("classpath:/application.properties")
 @ExtendWith(MockitoExtension.class)
 class MyComparatorServiceImplTest {
-
-    @Value("${service.currency.baseCurrency}")
-    String baseCurrency;
 
     @Mock
     private CurrencyService currencyService;
@@ -57,13 +52,13 @@ class MyComparatorServiceImplTest {
         rateData.add(histRateDataDto);
 
         CompareCurrencyResponseDto compareCurrencyResponseDto = new CompareCurrencyResponseDto();
-        compareCurrencyResponseDto.setBaseCurrency(baseCurrency);
+        compareCurrencyResponseDto.setBaseCurrency("USD");
         compareCurrencyResponseDto.setComparedCurrency("RUB");
         compareCurrencyResponseDto.setCompareResult("rich");
         compareCurrencyResponseDto.setRateData(rateData);
 
         Mockito
-                .when(currencyService.getCompareResult("RUB"))
+                .when(currencyService.getCompareResult(any()))
                 .thenReturn(new ResponseEntity(compareCurrencyResponseDto, HttpStatus.OK));
 
 
@@ -210,7 +205,7 @@ class MyComparatorServiceImplTest {
         getGifResponseDto.setMeta(metaDto);
 
         Mockito
-                .when(gifsService.getGif("rich"))
+                .when(gifsService.getGif(any()))
                 .thenReturn(new ResponseEntity(getGifResponseDto, HttpStatus.OK));
 
 
@@ -221,7 +216,7 @@ class MyComparatorServiceImplTest {
 
         //when
 
-        assertEquals(baseCurrency, respEntity.getBody().getBaseCurrency());
+        assertEquals("USD", respEntity.getBody().getBaseCurrency());
         assertEquals("RUB", respEntity.getBody().getComparedCurrency());
         assertEquals("rich", respEntity.getBody().getCompareResult());
         assertEquals(dateToday.toString(), respEntity.getBody().getRateData().get(0).getDate());

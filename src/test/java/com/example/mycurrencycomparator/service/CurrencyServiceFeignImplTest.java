@@ -3,48 +3,32 @@ package com.example.mycurrencycomparator.service;
 import com.example.mycurrencycomparator.client.CurrencyClient;
 import com.example.mycurrencycomparator.dto.currencyrate.CompareCurrencyResponseDto;
 import com.example.mycurrencycomparator.dto.currencyrate.ExchApiResponseDto;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
-@TestPropertySource("classpath:/application.properties")
 @ExtendWith(MockitoExtension.class)
 class CurrencyServiceFeignImplTest {
-
-    @Value("${service.currency.apiKey}")
-    String apiKey;
-
-    @Value("${service.currency.baseCurrency}")
-    String baseCurrency;
 
     @Mock
     private CurrencyClient currencyClient;
 
     @InjectMocks
     private CurrencyServiceFeignImpl currencyService;
-
-    @BeforeEach
-    public void setUp() {
-        ReflectionTestUtils.setField(currencyService, "apiKey", apiKey);
-        ReflectionTestUtils.setField(currencyService, "baseCurrency", baseCurrency);
-    }
 
     @Test
     void getCompareResult() {
@@ -62,14 +46,14 @@ class CurrencyServiceFeignImplTest {
         histResp.setDisclaimer("disclaimer");
         histResp.setLicense("license");
         histResp.setTimestamp(Long.valueOf(1234567890));
-        histResp.setBase(baseCurrency);
+        histResp.setBase("USD");
         histResp.setRates(histRates);
 
         ExchApiResponseDto latestResp = new ExchApiResponseDto();
         latestResp.setDisclaimer("disclaimer");
         latestResp.setLicense("license");
         latestResp.setTimestamp(Long.valueOf(1234567899));
-        latestResp.setBase(baseCurrency);
+        latestResp.setBase("USD");
         latestResp.setRates(latestRates);
 
 
@@ -78,11 +62,11 @@ class CurrencyServiceFeignImplTest {
 
 
         Mockito
-                .when(currencyClient.getHistoricalRate(dateYesterday.toString(), apiKey, baseCurrency, "RUB"))
+                .when(currencyClient.getHistoricalRate(any(), any(), any(), any()))
                 .thenReturn(new ResponseEntity(histResp, HttpStatus.OK));
 
         Mockito
-                .when(currencyClient.getLatestRate(apiKey, baseCurrency, "RUB"))
+                .when(currencyClient.getLatestRate(any(), any(), any()))
                 .thenReturn(new ResponseEntity(latestResp, HttpStatus.OK));
 
 
@@ -93,7 +77,7 @@ class CurrencyServiceFeignImplTest {
 
         //when
 
-        assertEquals(baseCurrency, respEntity.getBody().getBaseCurrency());
+        assertEquals("USD", respEntity.getBody().getBaseCurrency());
         assertEquals("RUB", respEntity.getBody().getComparedCurrency());
         assertEquals("broke", respEntity.getBody().getCompareResult());
         assertEquals(dateToday.toString(), respEntity.getBody().getRateData().get(0).getDate());

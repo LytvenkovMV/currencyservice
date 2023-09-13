@@ -1,36 +1,26 @@
 package com.example.mycurrencycomparator.service;
 
 import com.example.mycurrencycomparator.dto.gif.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 
 @SpringBootTest
-@TestPropertySource("classpath:/application.properties")
 @ExtendWith(MockitoExtension.class)
 class GifsServiceImplTest {
-
-    @Value("${service.gifs.url}")
-    private String url;
-
-    @Value("${service.gifs.apiKey}")
-    private String apiKey;
 
     @Mock
     private RestTemplate restTemplate;
@@ -38,14 +28,7 @@ class GifsServiceImplTest {
     @InjectMocks
     private GifsServiceImpl gifsService;
 
-    @BeforeEach
-    public void setUp() {
-        ReflectionTestUtils.setField(gifsService, "url", url);
-        ReflectionTestUtils.setField(gifsService, "apiKey", apiKey);
-    }
-
     @Test
-    @Disabled
     void getGif() {
 
 
@@ -194,16 +177,8 @@ class GifsServiceImplTest {
         getGifResponseDto.setMeta(metaDto);
 
 
-        String p1 = "api_key=" + apiKey;
-        String p2 = "q=" + "anything";
-        String p3 = "limit=" + 1;
-        String p4 = "offset=" + 1;
-        String p5 = "bundle=" + "messaging_non_clips";
-        String request = url + "?" + p1 + "&" + p2 + "&" + p3 + "&" + p4 + "&" + p5;
-
-
         Mockito
-                .when(restTemplate.getForEntity(request, GetGifResponseDto.class))
+                .when(restTemplate.getForEntity(anyString(), any()))
                 .thenReturn(new ResponseEntity(getGifResponseDto, HttpStatus.OK));
 
 

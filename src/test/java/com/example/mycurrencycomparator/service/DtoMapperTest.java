@@ -7,7 +7,6 @@ import com.example.mycurrencycomparator.dto.currencyrate.RateDataDto;
 import com.example.mycurrencycomparator.dto.gif.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@ActiveProfiles(profiles = "profile1")
 class DtoMapperTest {
 
     @Test
