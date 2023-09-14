@@ -2,6 +2,8 @@ package com.example.mycurrencycomparator.service;
 
 import com.example.mycurrencycomparator.dto.currencyrate.CompareCurrencyResponseDto;
 import com.example.mycurrencycomparator.dto.currencyrate.ExchApiResponseDto;
+import com.example.mycurrencycomparator.dto.currencyrate.RateDataDto;
+import com.example.mycurrencycomparator.mapper.MapStructMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,7 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,31 +26,17 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 
 @SpringBootTest
-////////////////////////////@TestPropertySource("classpath:/application.properties")
 @ExtendWith(MockitoExtension.class)
 class CurrencyServiceImplTest {
-
-//    @Value("${service.currency.url}")
-//    String url;
-//
-//    @Value("${service.currency.apiKey}")
-//    String apiKey;
-//
-//    @Value("${service.currency.baseCurrency}")
-//    String baseCurrency;
 
     @Mock
     private RestTemplate restTemplate;
 
+    @Mock
+    private MapStructMapper mapStructMapper;
+
     @InjectMocks
     private CurrencyServiceImpl currencyService;
-//
-//    @BeforeEach
-//    public void setUp() {
-//        ReflectionTestUtils.setField(currencyService, "url", url);
-//        ReflectionTestUtils.setField(currencyService, "apiKey", apiKey);
-//        ReflectionTestUtils.setField(currencyService, "baseCurrency", baseCurrency);
-//    }
 
     @Test
     void getCompareResult() {
@@ -54,44 +44,39 @@ class CurrencyServiceImplTest {
 
         //given
 
-        Map<String, Double> histRates = new LinkedHashMap<>();
-        histRates.put("RUB", 95.01);
+        Map<String, Double> rates = new LinkedHashMap<>();
+        rates.put("RUB", 35.02);
 
-        Map<String, Double> latestRates = new LinkedHashMap<>();
-        latestRates.put("RUB", 95.02);
-
-        ExchApiResponseDto histResp = new ExchApiResponseDto();
-        histResp.setDisclaimer("disclaimer");
-        histResp.setLicense("license");
-        histResp.setTimestamp(Long.valueOf(1234567890));
-        histResp.setBase("USD");
-        histResp.setRates(histRates);
-
-        ExchApiResponseDto latestResp = new ExchApiResponseDto();
-        latestResp.setDisclaimer("disclaimer");
-        latestResp.setLicense("license");
-        latestResp.setTimestamp(Long.valueOf(1234567899));
-        latestResp.setBase("USD");
-        latestResp.setRates(latestRates);
+        ExchApiResponseDto exchApiResponseDto = new ExchApiResponseDto();
+        exchApiResponseDto.setDisclaimer("disclaimer");
+        exchApiResponseDto.setLicense("license");
+        exchApiResponseDto.setTimestamp(Long.valueOf(1234567899));
+        exchApiResponseDto.setBase("USD");
+        exchApiResponseDto.setRates(rates);
 
 
         LocalDate dateToday = java.time.LocalDate.now();
         LocalDate dateYesterday = dateToday.minusDays(1);
 
-//        String p1 = "app_id=" + apiKey;
-//        String p2 = "base=" + baseCurrency;
-//        String p3 = "symbols=" + "RUB";
-//        String histRequest = url + "/historical/" + dateYesterday.toString() + ".json?" + p1 + "&" + p2 + "&" + p3;
-//        String latestRequest = url + "/latest.json?" + p1 + "&" + p2 + "&" + p3;
+
+        List<RateDataDto> rateData = new ArrayList<>();
+        rateData.add(new RateDataDto(dateToday.toString(), 35.02));
+        rateData.add(new RateDataDto(dateYesterday.toString(), 35.01));
+
+        CompareCurrencyResponseDto compareCurrencyResponseDto = new CompareCurrencyResponseDto();
+        compareCurrencyResponseDto.setBaseCurrency("USD");
+        compareCurrencyResponseDto.setComparedCurrency("RUB");
+        compareCurrencyResponseDto.setCompareResult("broke");
+        compareCurrencyResponseDto.setRateData(rateData);
 
 
         Mockito
                 .when(restTemplate.getForEntity(anyString(), any()))
-                .thenReturn(new ResponseEntity(histResp, HttpStatus.OK));
+                .thenReturn(new ResponseEntity(exchApiResponseDto, HttpStatus.OK));
 
         Mockito
-                .when(restTemplate.getForEntity(anyString(), any()))
-                .thenReturn(new ResponseEntity(latestResp, HttpStatus.OK));
+                .when(mapStructMapper.fromComparedCurrencyAndDatesAndExchApiResponseDtos(any(), any(), any(), any(), any()))
+                .thenReturn(compareCurrencyResponseDto);
 
 
         // then
@@ -105,8 +90,8 @@ class CurrencyServiceImplTest {
         assertEquals("RUB", respEntity.getBody().getComparedCurrency());
         assertEquals("broke", respEntity.getBody().getCompareResult());
         assertEquals(dateToday.toString(), respEntity.getBody().getRateData().get(0).getDate());
-        assertEquals(95.02, respEntity.getBody().getRateData().get(0).getRate());
+        assertEquals(35.02, respEntity.getBody().getRateData().get(0).getRate());
         assertEquals(dateYesterday.toString(), respEntity.getBody().getRateData().get(1).getDate());
-        assertEquals(95.01, respEntity.getBody().getRateData().get(1).getRate());
+        assertEquals(35.01, respEntity.getBody().getRateData().get(1).getRate());
     }
 }

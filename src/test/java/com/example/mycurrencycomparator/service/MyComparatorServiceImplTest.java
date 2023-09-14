@@ -4,6 +4,7 @@ import com.example.mycurrencycomparator.dto.comparator.MyComparatorResponseDto;
 import com.example.mycurrencycomparator.dto.currencyrate.CompareCurrencyResponseDto;
 import com.example.mycurrencycomparator.dto.currencyrate.RateDataDto;
 import com.example.mycurrencycomparator.dto.gif.*;
+import com.example.mycurrencycomparator.mapper.MapStructMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,6 +32,9 @@ class MyComparatorServiceImplTest {
 
     @Mock
     private GifsService gifsService;
+
+    @Mock
+    private MapStructMapper mapStructMapper;
 
     @InjectMocks
     private MyComparatorServiceImpl myComparatorService;
@@ -207,6 +211,19 @@ class MyComparatorServiceImplTest {
         Mockito
                 .when(gifsService.getGif(any()))
                 .thenReturn(new ResponseEntity(getGifResponseDto, HttpStatus.OK));
+
+
+        MyComparatorResponseDto myComparatorResponseDto = new MyComparatorResponseDto();
+        myComparatorResponseDto.setBaseCurrency("USD");
+        myComparatorResponseDto.setComparedCurrency("RUB");
+        myComparatorResponseDto.setCompareResult("rich");
+        myComparatorResponseDto.setRateData(rateData);
+        myComparatorResponseDto.setGifTitle("title");
+        myComparatorResponseDto.setImages(imagesDto);
+
+        Mockito
+                .when(mapStructMapper.fromCompareCurrencyAndGetGifResponseDto(any(), any()))
+                .thenReturn(myComparatorResponseDto);
 
 
         //then
